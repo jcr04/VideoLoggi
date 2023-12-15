@@ -4,6 +4,9 @@
 
 Bem-vindo ao repositório da VideoLoggi API, uma solução simples e eficaz para o gerenciamento e streaming de vídeos. Esta API permite aos usuários fazer upload, assistir e deletar vídeos através de um serviço web RESTful.
 
+* - ![Screenshot_4](https://github.com/jcr04/VideoLoggi/assets/70778525/d0dc9fd0-aba1-4124-b2c9-eaae0f571942)
+
+
 ## Características
 
 - **Upload de Vídeo**: Envie seus vídeos para o servidor de forma segura e rápida.
