@@ -28,7 +28,7 @@ public class VideoService {
 
     public Video saveVideo(MultipartFile file, String title, String description) throws IOException {
         String filename = storeFile(file);
-        String url = rootLocation.resolve(filename).toString();
+        String url = buildVideoUrl(filename);
         Video video = new Video(title, description, url, new Date());
         return videoRepository.save(video);
     }
@@ -43,14 +43,13 @@ public class VideoService {
 
     public void deleteVideo(Long id) {
         videoRepository.deleteById(id);
-        // Adicione aqui a lógica para deletar o arquivo físico, se necessário
+        // Implementar a lógica para deletar o arquivo físico, se necessário
     }
 
     private String storeFile(MultipartFile file) throws IOException {
         String filename = UUID.randomUUID().toString() + ".mp4";
         Path destinationFile = rootLocation.resolve(Paths.get(filename)).normalize().toAbsolutePath();
         if (!destinationFile.getParent().equals(rootLocation.toAbsolutePath())) {
-            // Verificação de segurança
             throw new IllegalStateException("Não foi possível armazenar o arquivo fora do diretório atual.");
         }
         try {
@@ -59,5 +58,10 @@ public class VideoService {
             throw new IOException("Falha ao armazenar o arquivo", e);
         }
         return filename;
+    }
+
+    private String buildVideoUrl(String filename) {
+        // Substitua "localhost:8081" pelo seu domínio ou endereço IP, se necessário
+        return "http://localhost:8081/video/" + filename;
     }
 }
